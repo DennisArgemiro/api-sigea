@@ -1,4 +1,4 @@
-const supabase = require("../supabase/supabase-js")
+const supabase = require("../supabase/supabase")
 
 module.exports = async (req, res)=>{
     const {idSolicitacao, pedagogo, resposta} = req.body
