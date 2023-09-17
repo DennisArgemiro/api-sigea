@@ -1,7 +1,7 @@
 const mail = require("../mail/mail")
 
 module.exports = async (req, res)=>{
-    const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = req.body;
+    const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = req.query;
     
     res.json(await mail.validation(mail, nome, { nome, matricula, dataNasc, cell, email, curso, turma, senha }))   
 }
