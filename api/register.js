@@ -1,4 +1,4 @@
-const mail = require("../mail/merge")
+const mail = require("../mail/mail")
 
 module.exports = async (req, res)=>{
     const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = req.body;
