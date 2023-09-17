@@ -16,7 +16,7 @@ function registerEmail(reciever, subject, body) {
 }
 
 module.exports = {
-    send:async (object) =>{
+    validation:async (object) =>{
         const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = object
     
         const params = { values: `${nome},${matricula},${dataNasc},${cell} ,${email},${curso},${turma},${senha}` }
