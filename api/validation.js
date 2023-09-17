@@ -1,4 +1,4 @@
-const supabase = require("../supabase/supabase")
+const supabase = require("../supabase/supabase-js")
 const path = require('path');
 
 module.exports = async (req, res) => {
