@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.33.2",
-    "nodemailer": "^6.9.5"
+    "nodemailer": "^6.9.5",
+    "vercel": "^32.2.4"
   }
 }
