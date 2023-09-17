@@ -1,28 +1,47 @@
-const Email = require("./smtp")
-const CONFIG = require("./config");
+const nodemailer = require("nodemailer")
+const CONFIG = require("../config")
 
-function registerEmail(reciever, subject, body) {
-    Email.send({
-        Host: CONFIG.host,
-        Username: CONFIG.address,
-        Password: CONFIG.passAddress,
-        To: reciever,
-        From: `"SINE" <${CONFIG.address}>`,
-        Subject: subject,
-        Body: body
-    }).then(
-        message => alert(message)
-    );
-}
+const transporter = nodemailer.createTransport({
+  host: CONFIG.host,
+  port: CONFIG.port,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: CONFIG.address, // generated ethereal user
+    pass: CONFIG.passAddress, // generated ethereal password
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
 
 module.exports = {
-    validation:async (object) =>{
-        const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = object
-    
-        const params = { values: `${nome},${matricula},${dataNasc},${cell} ,${email},${curso},${turma},${senha}` }
-        const html = await require("./merge").txt(params, nome)
+  validation: async (reciever, requester, object) => {
+    const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = object
 
-        registerEmail(email, `Finalize o seu cadastro, ${nome}!`, html)
-    
+    const params = {
+      query: "validation",
+      values: `${nome},${matricula},${dataNasc},${cell} ,${email},${curso},${turma},${senha}`
     }
+    
+    const html = await require("./merge").txt(params, nome)
+    const response = await transporter.sendMail({
+      from: `"SIEN" <${CONFIG.address}>`, // sender address
+      to: email, // list of receivers
+      subject: `Finalize o seu cadastro, ${nome}!`, // Subject line
+      // text:"",
+      html // plain text body
+    })
+    console.log(response.messageId)
+  },
+  redirectToSector: async (content) => {
+    const response = await transporter.sendMail({
+      from: `"Protocolar.IFPA"<${CONFIG.address}>`,
+      to: content.email,
+      subject: `Uma nova requisição foi feita por ${content.sender}`,
+      html: ""
+    })
+
+    return response
+  }
 }
+//Sistema de Gestão de Ensino e Aprendizagem (SIGEA)
