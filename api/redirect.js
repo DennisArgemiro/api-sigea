@@ -7,5 +7,5 @@ module.exports = async (req, res)=>{
     const setor = await supabase.selectSetor(idSetor)
     const aluno = await supabase.selectAluno(solicitacao.Aluno_matricula)
     console.log(setor)
-    res.json(await mail.redirectToSector(aluno.nome, solicitacao, setor.idSetor, setor.email)) 
+    res.json(await mail.redirectToSector(aluno.nome, solicitacao, setor.idSetor, setor[0].email)) 
 }
