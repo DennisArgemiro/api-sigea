@@ -7,7 +7,7 @@ module.exports = {
     <p style="margin-bottom: 10px;">Olá <strong>${nome}</strong>,</p>
     <p style=" margin-bottom: 10px;">Obrigado por se cadastrar em nosso site. Para ativar sua conta, clique no botão abaixo:</p>
     <p style=" margin-bottom: 10px;">
-      <a class="btn" href="https://api-sigea.vercel.app/validation.js?values=${params.values}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 5px;">Confirmar Cadastro</a>
+      <a class="btn" href="https://api-sigea.vercel.app/api/validation.js?values=${params.values}" style="display: inline-block; padding: 10px 20px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 5px;">Confirmar Cadastro</a>
     </p>
     <p style=" margin-bottom: 10px;">Se você não se cadastrou em nosso site, ignore este email.</p>
     <p style=" margin-bottom: 10px;">Atenciosamente,</p>
