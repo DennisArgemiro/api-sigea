@@ -7,6 +7,7 @@ const supabase = createClient(CONFIG.url, CONFIG.public)
 module.exports = {
   insertAluno: async (content) => {
     const splited = content.values.split(",")
+    console.log("splited: "+splited)
     const options = {
       nome: splited[0],
       matricula: splited[1],

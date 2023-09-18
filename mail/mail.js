@@ -20,9 +20,9 @@ module.exports = {
 
     const params = {
       query: "validation",
-      values: `${nome},${matricula},${dataNasc},${cell} ,${email},${curso},${turma},${senha}`
+      values: `${nome},${matricula},${dataNasc},${cell},${email},${curso},${turma},${senha}`
     }
-    
+    console.log(params)
     const html = await require("./merge").txt(params, nome)
     const response = await transporter.sendMail({
       from: `"SIGEA" <${CONFIG.address}>`, // sender address
