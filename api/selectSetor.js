@@ -7,6 +7,4 @@ module.exports =  async (req, res) => {
     }else{
         res.json(await supabase.selectSetor())
     }
-
-    res.json(response)
 }
