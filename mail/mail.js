@@ -33,7 +33,8 @@ module.exports = {
     })
     console.log(response.messageId)
   },
-  redirectToSector: async (nome, solicitacao = {}, idSetor, mail) => {
+  redirectToSector: async (nome, solicitacao, idSetor, mail) => {
+    console.log(mail)
     const html = await require("./merge").responseEmail(nome, solicitacao, idSetor)
 
     const response = await transporter.sendMail({
