@@ -5,6 +5,6 @@ module.exports = async (req, res)=>{
     const { idSolicitacao, idSetor} = req.query;
     const solicitacao = await supabase.selectReclamacao("id", parseInt(idSolicitacao))
     const setor = await supabase.selectSetor(parseInt(idSetor))
-    const aluno = await supabase.selectAluno(solicitacao.matricula)
+    const aluno = await supabase.selectAluno(solicitacao.Aluno_matricula)
     res.json(await mail.redirectToSector(aluno.nome, solicitacao, setor.idSetor, setor.email)) 
 }
