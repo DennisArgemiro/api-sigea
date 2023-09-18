@@ -25,7 +25,7 @@ module.exports = {
     
     const html = await require("./merge").txt(params, nome)
     const response = await transporter.sendMail({
-      from: `"SIEN" <${CONFIG.address}>`, // sender address
+      from: `"SIGEA" <${CONFIG.address}>`, // sender address
       to: email, // list of receivers
       subject: `Finalize o seu cadastro, ${nome}!`, // Subject line
       // text:"",
@@ -34,11 +34,14 @@ module.exports = {
     console.log(response.messageId)
   },
   redirectToSector: async (content) => {
+    const {nome, solicitacao = {}, idSetor, mail} = content
+    const html = await require("./merge").responseEmail(nome, solicitacao, idSetor)
+
     const response = await transporter.sendMail({
-      from: `"Protocolar.IFPA"<${CONFIG.address}>`,
-      to: content.email,
-      subject: `Uma nova requisição foi feita por ${content.sender}`,
-      html: ""
+      from: `"SIGEA"<${CONFIG.address}>`,
+      to: mail,
+      subject: `Uma nova requisição foi feita por ${nome}`,
+      html
     })
 
     return response
