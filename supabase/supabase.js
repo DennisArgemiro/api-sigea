@@ -19,6 +19,7 @@ module.exports = {
     }
 
     const { error } = await supabase.from("Aluno").insert(options)
+    console.log(error)
     const response = error ? 400 : 200
     return response
   },
