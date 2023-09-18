@@ -5,7 +5,7 @@ module.exports =  async (req, res) => {
     if (id != undefined){
          res.json(await supabase.selectSetor(id))
     }else{
-        res.json(await supabase.selectSetor(id))
+        res.json(await supabase.selectSetor())
     }
 
     res.json(response)
