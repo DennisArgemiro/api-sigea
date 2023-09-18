@@ -17,7 +17,7 @@ module.exports = {
       turma: splited[6],
       senha: splited[7],
     }
-
+    console.log(options)
     const { error } = await supabase.from("Aluno").insert(options)
     console.log(error)
     const response = error ? 400 : 200
