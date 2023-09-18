@@ -129,5 +129,14 @@ module.exports = {
     } else{
       return error
     }
+  },
+  selectSetor:async (id = undefined)=>{
+    if(id!=undefined){
+      const {data, error} = await supabase.from("Setor").select().eq("idSetor", id)
+      return data
+    }else{
+      const {data, error} = await supabase.from("Setor").select()
+      return data
+    }
   }
 }
