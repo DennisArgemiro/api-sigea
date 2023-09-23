@@ -6,9 +6,9 @@ module.exports = async (req, res)=>{
     const hist = await supabase.selectReclamacao("id", idSolicitacao)
     console.log(hist.historico)
 
-    hist.historico != undefined ? hist.historico[hist.historico.length] = JSON.parse(object): hist[0]= JSON.parse(object) 
+    hist.historico != undefined ? hist.historico[Object.keys(hist.historico).length] = JSON.parse(object): hist[0]= JSON.parse(object) 
 
-    const data = await supabase.updateHistorico(idSolicitacao, hist)
+    const data = await supabase.updateHistorico(idSolicitacao, hist.historico)
 
     res.json(data == undefined ? { status: 400 } : data)   
     
