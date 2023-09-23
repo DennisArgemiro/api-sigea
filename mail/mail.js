@@ -17,6 +17,7 @@ const transporter = nodemailer.createTransport({
 module.exports = {
   validation: async (reciever, requester, object) => {
     const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = object
+    console.log()
 
     const params = {
       query: "validation",

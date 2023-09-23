@@ -31,10 +31,15 @@ module.exports = {
     const options = {
       Aluno_matricula, Pedagogo_matricula, assunto, descricao, anexo, status
     }
-    const { error } = await supabase.from("Reclamacao").insert(options)
-
-    const response = error ? error : { status: 200 }
-    return response
+    
+    const {data, error} = await supabase.from("Aluno").select().eq("email", email)
+    if(data == undefined){
+      const { error } = await supabase.from("Reclamacao").insert(options)
+      const response = error ? error : { status: 200 }
+      return response
+    } else{
+      return {status: 400}
+    }
   },
   selectLogin: async (email, senha) => {
     const { data, error } = await supabase.from("Aluno").select().eq("email", `${email}`)
@@ -139,6 +144,17 @@ module.exports = {
     }else{
       const {data, error} = await supabase.from("Setor").select()
       return data
+    }
+  },
+  updateHistorico: async (idReclamacao, object)=>{
+    const {error} = await supabase.from("Reclamacao").update({
+      historico: object
+    }).eq("idReclamaca", idReclamacao)
+
+    if (error){
+      return error
+    } else{
+      return {status: 200}
     }
   }
 }
