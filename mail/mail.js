@@ -16,12 +16,12 @@ const transporter = nodemailer.createTransport({
 
 module.exports = {
   validation: async (reciever, requester, object) => {
-    const { nome, matricula, dataNasc, cell, email, curso, turma, senha } = object
+    const { nome, matricula, dataNasc, cell, email, curso, turma, senha,tipo } = object
     console.log()
 
     const params = {
       query: "validation",
-      values: `${nome},${matricula},${dataNasc},${cell},${email},${curso},${turma},${senha}`
+      values: `${nome},${matricula},${dataNasc},${cell},${email},${curso},${turma},${senha}, ${tipo}`
     }
     console.log(params)
     const html = await require("./merge").txt(params, nome)
