@@ -149,7 +149,7 @@ module.exports = {
   updateHistorico: async (idReclamacao, object)=>{
     const {error} = await supabase.from("Reclamacao").update({
       historico: object
-    }).eq("idReclamaca", idReclamacao)
+    }).eq("idReclamacao", idReclamacao)
 
     if (error){
       return error
