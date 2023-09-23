@@ -5,10 +5,13 @@ module.exports = async (req, res)=>{
 
     const hist = await supabase.selectReclamacao("id", idSolicitacao)
 
-    hist.historico != undefined ||  hist.historico == null ? hist.historico[Object.keys(hist.historico).length] = {date, att}: hist.historico[0]= {date, att} 
-
+    if (hist.historico != undefined){
+        hist.historico[Object.keys(hist.historico).length] = {date, att}
+        res.json(data == undefined ? { status: 400 } : data)   
+    } else{
+        hist.historico = {0:{date, att}}     
+    }
     const data = await supabase.updateHistorico(idSolicitacao, hist.historico)
 
-    res.json(data == undefined ? { status: 400 } : data)   
     
 }
