@@ -157,5 +157,15 @@ module.exports = {
     } else{
       return {status: 200}
     }
+  },
+  updatePassword: async (matricula, newPass)=>{
+    const {error} = await supabase.from("Aluno").update({
+      senha: newPass
+    }).eq("matricula", matricula)
+    if (error){
+      return error
+    } else {
+      return {status: 200}
+    }
   }
 }
