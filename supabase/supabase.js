@@ -189,5 +189,14 @@ module.exports = {
   },
   updateAluno: async (aluno)=>{
     const { error } = await supabase.from("Aluno").update(aluno).eq("matricula", aluno.matricula)
+    if (error){
+      return {
+        status: 400
+      }
+    }else{
+      return {
+        status: 200
+      }
+    }
   }
 }
