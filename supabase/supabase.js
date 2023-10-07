@@ -82,20 +82,27 @@ module.exports = {
       }
     }
   },
-  selectAluno: async (matricula) => {
-    if (matricula != "none") {
-      const { data, error } = await supabase.from("Aluno").select().eq("matricula", matricula)
-      if (error) {
-        return error
-      } else {
-        return data[0]
-      }
-    } else {
+  selectAluno: async (param, value) => {
+    if (param == "none") {
       const { data, error } = await supabase.from("Aluno").select()
       if (error) {
         return error
       } else {
         return data
+      }
+    } else if(param == "matricula"){
+      const { data, error } = await supabase.from("Aluno").select().eq("matricula", value)
+      if (error) {
+        return error
+      } else {
+        return data[0]
+      }
+    }else if (param == "email"){
+      const { data, error } = await supabase.from("Aluno").select().eq("email", value)
+      if (error) {
+        return error
+      } else {
+        return data[0]
       }
     }
   },
@@ -126,10 +133,10 @@ module.exports = {
       return error
     }
   },
-  awnserPedagogo: async (idReclamacao, idPedagogo, response)=>{
+  awnserPedagogo: async (idReclamacao, idPedagogo, response, status)=>{
     const {error} = await supabase.from("Reclamacao").update({
       resposta: response,
-      status: "CONCLUIDO"
+      status: status
     }).eq("idReclamacao", idReclamacao)
 
     if(!error){
@@ -157,6 +164,18 @@ module.exports = {
     } else{
       return {status: 200}
     }
+  },
+  updatePassword: async (matricula, newPass)=>{
+    const {error} = await supabase.from("Aluno").update({
+      senha: newPass
+    }).eq("matricula", matricula)
+    if (error){
+      console.log(error)
+      return {status: 400}
+    } else {
+      return {status: 200}
+    }
+
   },
   updatePassword: async (matricula, newPass)=>{
     const {error} = await supabase.from("Aluno").update({
