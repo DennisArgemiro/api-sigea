@@ -33,7 +33,7 @@ module.exports = {
       Aluno_matricula, Pedagogo_matricula, assunto, descricao, anexo, status
     }
     
-    const {data, error} = await supabase.from("Aluno").select().eq("email", email)
+    // const {data, error} = await supabase.from("Aluno").select().eq("email", email)
     if(data == undefined){
       const { error } = await supabase.from("Reclamacao").insert(options)
       const response = error ? error : { status: 200 }
