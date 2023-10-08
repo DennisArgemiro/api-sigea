@@ -27,19 +27,14 @@ module.exports = {
   },
 
   insertReclamacao: async (content) => {
-
-    const { Aluno_matricula, Pedagogo_matricula, assunto, descricao, anexo, status, email } = content
+    const { Aluno_matricula, Pedagogo_matricula, assunto, descricao, anexo, status } = content
     const options = {
       Aluno_matricula, Pedagogo_matricula, assunto, descricao, anexo, status
     }
-    const {data, error} = await supabase.from("Aluno").select().eq("email", email)
-    if(data == undefined){
-      const { error } = await supabase.from("Reclamacao").insert(options)
-      const response = error ? error : { status: 200 }
-      return response
-    } else{
-      return {status: 400}
-    }
+    const { error } = await supabase.from("Reclamacao").insert(options)
+
+    const response = error ? error : { status: 200 }
+    return response
   },
   selectLogin: async (email, senha) => {
     const { data, error } = await supabase.from("Aluno").select().eq("email", `${email}`)
